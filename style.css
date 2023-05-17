@@ -1,0 +1,43 @@
+/* TABELLA DI GIOCO */
+#tabella {
+    width: 50vw;
+    height: 50vh;
+
+    margin: auto;
+
+    display: flex;
+    flex-wrap: wrap;
+
+    border: 1px solid black;
+}
+
+/******************
+*  CELLE DI GICO
+*******************/
+
+/* celle default livello FACILE */
+.cella {
+    width: calc(100% / 10);
+    height: calc(100% / 10);
+
+    border: 1px solid lightslategray;
+
+    cursor: crosshair;
+}
+
+/* cella livello MEDIO */
+.cella.medio {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+/* cella livello DIFFICILE */
+.cella.difficile {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
+
+/* al click sulla cella */
+.active {
+    background-color: lightskyblue;
+}
