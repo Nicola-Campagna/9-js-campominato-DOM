@@ -1,14 +1,13 @@
 /* TABELLA DI GIOCO */
 #tabella {
-    width: 50vw;
-    height: 50vh;
-
-    margin: auto;
-
     display: flex;
     flex-wrap: wrap;
 
-    border: 1px solid black;
+    height: 50vh;
+    margin: 10rem;
+
+
+    /* border: 1px solid black; */
 }
 
 /******************

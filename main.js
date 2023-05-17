@@ -1,7 +1,23 @@
-// tabella di gioco
-const tabella = document.getElementById("tabella");
+// bottone per iniziare il gioco
+const btnEl = document.getElementById("start");
+// al click si genera la tabella di gioco con le celle
+btnEl.addEventListener(
+    "click",
+    function () {
+        // tabella di gioco
+        const tabella = document.getElementById("tabella");
+        // select della difficoltà del gioco
+        const difficolta = document.getElementById("level");
+        // livello di gioco
+        const level = difficolta.value;
 
-generaTabella(tabella, 1);
+        // GENERA TABELLA E CELLE DI GIOCO
+        generaTabella(tabella, level);
+
+    }
+)
+
+
 
 
 /************************
@@ -16,12 +32,27 @@ generaTabella(tabella, 1);
  */
 
 function generaTabella(grid, difficolta) {
-    grid.innnerHTML = "";
+    grid.innerHTML = "";
+
+    let numeroCelle;
+    // SE il livello è 1 (FACILE) 10x10
+    if (difficolta == 1) {
+        numeroCelle = 100;
+    }
+    // ALTRIEMENTI SE il livello è 2 (MEDIO) 9x9
+    else if (difficolta == 2) {
+        numeroCelle = 81;
+    }
+    // ALTRIEMENTI il livello è 3 (DIFFICILE) 7x7
+    else {
+        numeroCelle = 49;
+    }
+
     // ciclo per generare numero di celle in base alla 
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < numeroCelle; i++) {
         // variabile d'appoggio per invocare e creare la cella
         const testoCella = i + 1;
-        const cella = generaCella(1, testoCella);
+        const cella = generaCella(difficolta, testoCella);
         // appendo nella tabella la cella creata
         grid.append(cella);
     }
@@ -41,6 +72,16 @@ function generaCella(difficolta, testo) {
     const cellaEl = document.createElement("div");
     // aggiungo la classe css
     cellaEl.classList.add("cella");
+
+
+    if (difficolta == 3) {
+        cellaEl.classList.add("difficile");
+    } else if (difficolta == 2) {
+        cellaEl.classList.add("medio");
+    }
+
+
+
     // testo all'interno della cella nel DOM
     cellaEl.innerHTML = testo;
     // al click si accende o spegne
