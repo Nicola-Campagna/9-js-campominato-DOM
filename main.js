@@ -62,8 +62,6 @@ function generaTabella(grid, difficolta) {
     bombeEl = generaBombe(difficolta, numeroCelle);
     console.log("bombe generate: " + bombeEl);
 
-
-
 }
 
 
@@ -91,9 +89,6 @@ function generaCella(difficolta, testo) {
         cellaEl.classList.add("medio");
     }
 
-
-
-
     // testo all'interno della cella nel DOM
     cellaEl.innerHTML = testo;
     // al click si accende o spegne
@@ -101,11 +96,14 @@ function generaCella(difficolta, testo) {
         "click",
         function () {
             // accendi o spegni
-            this.classList.toggle("active");
             console.log("hai cliccato la cella: " + this.innerHTML);
+
             // SE le bombe includono la cella clicccata diventa rossa e perdiamo
-            if (bombeEl.includes(parseInt(this.innerHTML))) {
-                this.classList.toggle("red");
+            if (!bombeEl.includes(parseInt(this.innerHTML))) {
+                this.classList.add("active");
+            }
+            else {
+                this.classList.add("active-red");
                 console.log("HAI PERSO \n hai cliccato la bomba");
             }
         }
