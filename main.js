@@ -73,14 +73,14 @@ function generaCella(difficolta, testo) {
     // aggiungo la classe css
     cellaEl.classList.add("cella");
 
-
+    // SE il livello è DIFFICILE aggiungi la classe "difficile" per avere una tabella 7x7
     if (difficolta == 3) {
         cellaEl.classList.add("difficile");
-    } else if (difficolta == 2) {
+    }
+    // ALTRIMENTI SE il livello è MEDIO aggiungi la classe "medio" per avere una tabella 9x9
+    else if (difficolta == 2) {
         cellaEl.classList.add("medio");
     }
-
-
 
     // testo all'interno della cella nel DOM
     cellaEl.innerHTML = testo;
