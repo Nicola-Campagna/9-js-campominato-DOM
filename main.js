@@ -103,9 +103,13 @@ function generaCella(difficolta, testo) {
 
 
 
-// TO-DO-LIST
-// genera 16 numeri casuali che non si ripetono = Bombe
 
+/**
+ * funzione che genera delle bombe per la tabella che non si ripetono mai
+ * @param {int} difficolta valore che indica a seconda della difficolta di gioco il numero di celle da inserire nella tabella
+ * @param {int} numeroCelle numero di celle (numero massimo da moltiplicare) per generare le bombe
+ * @returns {Array} array di numeri (bombe)
+ */
 function generaBombe(difficolta, numeroCelle) {
     // 16 bombe casuali
     const bombe = [];
