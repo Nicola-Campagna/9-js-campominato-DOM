@@ -56,6 +56,10 @@ function generaTabella(grid, difficolta) {
         // appendo nella tabella la cella creata
         grid.append(cella);
     }
+
+    const bombeEl = generaBombe(difficolta, numeroCelle);
+    console.log("bombe generate: " + bombeEl);
+
 }
 
 
@@ -96,3 +100,21 @@ function generaCella(difficolta, testo) {
     // ritorno la cella creata
     return cellaEl;
 }
+
+
+
+// TO-DO-LIST
+// genera 16 numeri casuali che non si ripetono = Bombe
+
+function generaBombe(difficolta, numeroCelle) {
+    // 16 bombe casuali
+    const bombe = [];
+    while (bombe.length < 16) {
+        const randomNumber = Math.floor(Math.random() * numeroCelle + 1);
+        if (!bombe.includes(randomNumber)) {
+            bombe.push(randomNumber)
+        }
+    }
+    return bombe;
+}
+
