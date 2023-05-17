@@ -1,5 +1,7 @@
 // bottone per iniziare il gioco
 const btnEl = document.getElementById("start");
+let bombeEl;
+let game;
 // al click si genera la tabella di gioco con le celle
 btnEl.addEventListener(
     "click",
@@ -12,11 +14,10 @@ btnEl.addEventListener(
         const level = difficolta.value;
 
         // GENERA TABELLA E CELLE DI GIOCO
-        generaTabella(tabella, level);
+        game = generaTabella(tabella, level);
 
     }
 )
-
 
 
 
@@ -57,8 +58,11 @@ function generaTabella(grid, difficolta) {
         grid.append(cella);
     }
 
-    const bombeEl = generaBombe(difficolta, numeroCelle);
+    // BOMBE
+    bombeEl = generaBombe(difficolta, numeroCelle);
     console.log("bombe generate: " + bombeEl);
+
+
 
 }
 
@@ -77,6 +81,7 @@ function generaCella(difficolta, testo) {
     // aggiungo la classe css
     cellaEl.classList.add("cella");
 
+
     // SE il livello è DIFFICILE aggiungi la classe "difficile" per avere una tabella 7x7
     if (difficolta == 3) {
         cellaEl.classList.add("difficile");
@@ -85,6 +90,9 @@ function generaCella(difficolta, testo) {
     else if (difficolta == 2) {
         cellaEl.classList.add("medio");
     }
+
+
+
 
     // testo all'interno della cella nel DOM
     cellaEl.innerHTML = testo;
@@ -95,6 +103,11 @@ function generaCella(difficolta, testo) {
             // accendi o spegni
             this.classList.toggle("active");
             console.log("hai cliccato la cella: " + this.innerHTML);
+            // SE le bombe includono la cella clicccata diventa rossa e perdiamo
+            if (bombeEl.includes(parseInt(this.innerHTML))) {
+                this.classList.toggle("red");
+                console.log("HAI PERSO \n hai cliccato la bomba");
+            }
         }
     )
     // ritorno la cella creata

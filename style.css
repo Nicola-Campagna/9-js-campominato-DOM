@@ -44,3 +44,7 @@
 .active {
     background-color: lightskyblue;
 }
+
+.active.red {
+    background-color: red;
+}
