@@ -1,3 +1,9 @@
+body {
+    background-color: #118ab2;
+}
+
+
+
 /* TABELLA DI GIOCO */
 #tabella {
     display: flex;
@@ -5,13 +11,10 @@
 
     height: 50vh;
     margin: 10rem;
-
-
-    /* border: 1px solid black; */
 }
 
 /******************
-*  CELLE DI GICO
+*  CELLE DI GIOCO
 *******************/
 
 /* celle default livello FACILE */
@@ -19,8 +22,8 @@
     width: calc(100% / 10);
     height: calc(100% / 10);
 
-    border: 1px solid lightslategray;
-
+    border: 3px solid #ffc107;
+    /* color: #c742bc; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -42,9 +45,9 @@
 
 /* al click sulla cella */
 .active {
-    background-color: lightskyblue;
+    background-color: #06d6a0;
 }
 
 .active-red {
-    background-color: red;
+    background-color: #ef476f;
 }
