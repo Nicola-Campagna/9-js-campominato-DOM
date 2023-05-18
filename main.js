@@ -174,4 +174,13 @@ function gameOver(activeCelle, userWin) {
         alert("HAI PERSO , hai fatto " + activeCelle.length + " punti");
 
     }
+    const allCelle = document.querySelectorAll(".cella");
+    // ciclo  of per iterare gli array
+    for (const celle of allCelle) {
+        const celleIndex = parseInt(celle.getAttribute("data-index"));
+        if (bombeEl.includes(celleIndex)) {
+            celle.classList.add("active-red");
+        }
+
+    }
 }
