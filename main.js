@@ -1,20 +1,19 @@
 // bottone per iniziare il gioco
 const btnEl = document.getElementById("start");
 let bombeEl;
-let game;
 // al click si genera la tabella di gioco con le celle
 btnEl.addEventListener(
     "click",
     function () {
         // tabella di gioco
-        const tabella = document.getElementById("tabella");
+        let tabella = document.getElementById("tabella");
         // select della difficoltà del gioco
-        const difficolta = document.getElementById("level");
+        let difficolta = document.getElementById("level");
         // livello di gioco
-        const level = difficolta.value;
+        let level = difficolta.value;
 
         // GENERA TABELLA E CELLE DI GIOCO
-        game = generaTabella(tabella, level);
+        generaTabella(tabella, level);
 
     }
 )
@@ -53,7 +52,7 @@ function generaTabella(grid, difficolta) {
     for (let i = 0; i < numeroCelle; i++) {
         // variabile d'appoggio per invocare e creare la cella
         const testoCella = i + 1;
-        const cella = generaCella(difficolta, testoCella);
+        const cella = generaCella(difficolta, testoCella, numeroCelle);
         // appendo nella tabella la cella creata
         grid.append(cella);
     }
@@ -73,7 +72,7 @@ function generaTabella(grid, difficolta) {
  * @returns {HTMLElement} elemnto da ritornare sarà una cella
  */
 
-function generaCella(difficolta, testo) {
+function generaCella(difficolta, testo, numeroCelle) {
     // creo la cella
     const cellaEl = document.createElement("div");
     // aggiungo la classe css
@@ -91,21 +90,39 @@ function generaCella(difficolta, testo) {
 
     // testo all'interno della cella nel DOM
     cellaEl.innerHTML = testo;
+    // nascondiamo il valore della cella all'utente settando un attributo html
+    cellaEl.setAttribute("data-index", testo);
     // al click si accende o spegne
     cellaEl.addEventListener(
         "click",
         function () {
-            // accendi o spegni
-            console.log("hai cliccato la cella: " + this.innerHTML);
+            // prendiamo l'atttributo html e lo inseriamo in una variabile 
+            const cellaIndex = this.getAttribute("data-index");
+            // prendiamo tutte le celle cliccate
+            const activeCelle = document.querySelectorAll(".cella.active");
+
+            console.log("hai cliccato la cella: " + cellaIndex);
 
             // SE le bombe includono la cella clicccata diventa rossa e perdiamo
-            if (!bombeEl.includes(parseInt(this.innerHTML))) {
-                this.classList.add("active");
-            }
-            else {
+            if (bombeEl.includes(parseInt(cellaIndex))) {
+                // diventa rossa
                 this.classList.add("active-red");
-                console.log("HAI PERSO \n hai cliccato la bomba");
+                console.log("hai cliccato la bomba");
+                // TERMINA  PARTITA PERDE (0=FALSE)
+                gameOver(activeCelle, false);
             }
+            // ALTRIMENTI
+            else {
+                // assegniamo la classe active
+                this.classList.add("active");
+                console.log("era libera");
+            }
+            // SE era l'ultima cella cliccabile ...
+            if (activeCelle.length == numeroCelle - bombeEl.length - 1) {
+                // HAI VINTO e TERMINA PARTITA (1=TRUE)
+                gameOver(activeCelle, true);
+            }
+
         }
     )
     // ritorno la cella creata
@@ -119,7 +136,7 @@ function generaCella(difficolta, testo) {
  * funzione che genera delle bombe per la tabella che non si ripetono mai
  * @param {int} difficolta valore che indica a seconda della difficolta di gioco il numero di celle da inserire nella tabella
  * @param {int} numeroCelle numero di celle (numero massimo da moltiplicare) per generare le bombe
- * @returns {Array} array di numeri (bombe)
+ * @returns {int[]} array di numeri (bombe)
  */
 function generaBombe(difficolta, numeroCelle) {
     // 16 bombe casuali
@@ -133,3 +150,21 @@ function generaBombe(difficolta, numeroCelle) {
     return bombe;
 }
 
+
+
+/**
+ * 
+ * @param {*} activeCelle 
+ * @param {boolean} userWin 
+ */
+function gameOver(activeCelle, userWin) {
+    // const activeCelle = document.querySelectorAll(".cella.active");
+    console.log(activeCelle);
+    if (userWin) {
+        alert("HAI VINTO , hai fatto " + activeCelle.length + " punti");
+
+    } else {
+        alert("HAI PERSO , hai fatto " + activeCelle.length + " punti");
+
+    }
+}
