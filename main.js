@@ -1,6 +1,8 @@
 // bottone per iniziare il gioco
 const btnEl = document.getElementById("start");
 let bombeEl;
+let gameover = false;
+
 // al click si genera la tabella di gioco con le celle
 btnEl.addEventListener(
     "click",
@@ -12,6 +14,7 @@ btnEl.addEventListener(
         // livello di gioco
         let level = difficolta.value;
 
+        gameover = false;
         // GENERA TABELLA E CELLE DI GIOCO
         generaTabella(tabella, level);
 
@@ -96,31 +99,34 @@ function generaCella(difficolta, testo, numeroCelle) {
     cellaEl.addEventListener(
         "click",
         function () {
-            // prendiamo l'atttributo html e lo inseriamo in una variabile 
-            const cellaIndex = this.getAttribute("data-index");
-            // prendiamo tutte le celle cliccate
-            const activeCelle = document.querySelectorAll(".cella.active");
+            if (!gameover) {
 
-            console.log("hai cliccato la cella: " + cellaIndex);
+                // prendiamo l'atttributo html e lo inseriamo in una variabile 
+                const cellaIndex = this.getAttribute("data-index");
+                // prendiamo tutte le celle cliccate
+                const activeCelle = document.querySelectorAll(".cella.active");
 
-            // SE le bombe includono la cella clicccata diventa rossa e perdiamo
-            if (bombeEl.includes(parseInt(cellaIndex))) {
-                // diventa rossa
-                this.classList.add("active-red");
-                console.log("hai cliccato la bomba");
-                // TERMINA  PARTITA PERDE (0=FALSE)
-                gameOver(activeCelle, false);
-            }
-            // ALTRIMENTI
-            else {
-                // assegniamo la classe active
-                this.classList.add("active");
-                console.log("era libera");
-            }
-            // SE era l'ultima cella cliccabile ...
-            if (activeCelle.length == numeroCelle - bombeEl.length - 1) {
-                // HAI VINTO e TERMINA PARTITA (1=TRUE)
-                gameOver(activeCelle, true);
+                console.log("hai cliccato la cella: " + cellaIndex);
+
+                // SE le bombe includono la cella clicccata diventa rossa e perdiamo
+                if (bombeEl.includes(parseInt(cellaIndex))) {
+                    // diventa rossa
+                    this.classList.add("active-red");
+                    console.log("hai cliccato la bomba");
+                    // TERMINA  PARTITA PERDE (0=FALSE)
+                    gameOver(activeCelle, false);
+                }
+                // ALTRIMENTI
+                else {
+                    // assegniamo la classe active
+                    this.classList.add("active");
+                    console.log("era libera");
+                }
+                // SE era l'ultima cella cliccabile ...
+                if (activeCelle.length == numeroCelle - bombeEl.length - 1) {
+                    // HAI VINTO e TERMINA PARTITA (1=TRUE)
+                    gameOver(activeCelle, true);
+                }
             }
 
         }
@@ -158,6 +164,7 @@ function generaBombe(difficolta, numeroCelle) {
  * @param {boolean} userWin 
  */
 function gameOver(activeCelle, userWin) {
+    gameover = true;
     // const activeCelle = document.querySelectorAll(".cella.active");
     console.log(activeCelle);
     if (userWin) {
