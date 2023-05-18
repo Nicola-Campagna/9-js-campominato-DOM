@@ -13,3 +13,6 @@ BONUS PARTE 1 :
 * In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
 * La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
 
+                                     SUPERBONUS :
+* Al click su una bomba o al termina di una partita , evitare  che si possano cliccare altre celle ;
+* Al click su una bomba o al termina di una partita , il software scopre tutte le bombe ;
